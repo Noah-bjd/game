@@ -1,5 +1,6 @@
 import pygame
-from PIL import Image
+from .Flicker import flicker
+
 
 def show_fullscreen(pil_image):
     """
@@ -7,7 +8,7 @@ def show_fullscreen(pil_image):
     :param pil_image: A PIL Image object.
     :return: None
     """
-    # Convert PIL image to pygame Surface
+    # Convert PIL ima ge to pygame Surface
     mode = pil_image.mode
     size = pil_image.size
     data = pil_image.tobytes()
@@ -16,12 +17,12 @@ def show_fullscreen(pil_image):
     # Initialize pygame
     pygame.init()
     window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    clock = pygame.time.Clock()
     running = True
     w_width, w_height = window.get_size()
 
     # Scale the image to fullscreen
     image = pygame.transform.scale(image, (w_width, w_height))
+    space_pressed = False
 
     while running:
         for event in pygame.event.get():
@@ -30,9 +31,19 @@ def show_fullscreen(pil_image):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                elif event.key == pygame.K_SPACE:  # ⬅️ change on SPACE
+                    space_pressed = not space_pressed  # toggle between images
+
         window.fill("white")
-        window.blit(image, (0, 0))
+        if space_pressed:
+            # add animation isntead of flickers or reproduce window error
+            flicker(window)
+            screenshot = pygame.image.load("Hck.png")
+            screenshot = pygame.transform.scale(screenshot, (w_width, w_height))
+            window.blit(screenshot, (0, 0))
+        else:
+            window.blit(image, (0, 0))
+
         pygame.display.flip()
-        clock.tick(60)
 
     pygame.quit()
