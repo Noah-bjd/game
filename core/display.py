@@ -1,7 +1,8 @@
 import pygame
 import random
-from .Flicker import flicker
-from effects import BlockGlitch, intense_block_glitch , DatamoshGlitch, scary_datamosh_glitch , flick
+
+from effects.glitch_func import BlockGlitch, DatamoshGlitch, intense_block_glitch, scary_datamosh_glitch
+from effects.glitch_func import flick
 
 def show_fullscreen(pil_image):
     """
@@ -28,6 +29,7 @@ def show_fullscreen(pil_image):
     # Initialize the block glitch processor
     glitch_processor = BlockGlitch(w_width, w_height)
     another_glitch_processor = DatamoshGlitch(w_width, w_height)
+    
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -35,14 +37,12 @@ def show_fullscreen(pil_image):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
-                elif event.key == pygame.K_SPACE:  # ⬅️ change on SPACE
-                    space_pressed = not space_pressed  # toggle between images
+                elif event.key == any and event.key != pygame.K_ESCAPE:
+                    space_pressed = not space_pressed 
         
         window.blit(image, (0, 0))
         if space_pressed:
-            # Apply the intense block glitch effect
             intense_block_glitch(window, glitch_processor, intensity=random.randint(20, 30))
-            # Apply the scary datamosh glitch effect
             scary_datamosh_glitch(window, another_glitch_processor, intensity=random.randint(20, 30))
             flick(window, intensity=random.randint(5, 15))
 
