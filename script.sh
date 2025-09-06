@@ -1,2 +1,2 @@
 pip install --upgrade pip
-pip install pygame pyautogui pillow
+pip install pygame pyautogui pillow numpy

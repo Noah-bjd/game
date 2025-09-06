@@ -1,7 +1,7 @@
 import pygame
 import random
 
-def glitch(surface, intensity=10):
+def flick(surface, intensity=10):
     """
     Applies a fullscreen glitch effect by shifting screen slices in various directions.
     
