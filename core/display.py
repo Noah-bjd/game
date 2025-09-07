@@ -1,8 +1,9 @@
 import pygame
 import random
-
+import time
 from effects.glitch_func import BlockGlitch, DatamoshGlitch, intense_block_glitch, scary_datamosh_glitch
 from effects.glitch_func import flick
+from .test import test
 
 def show_fullscreen(pil_image):
     """
@@ -37,14 +38,20 @@ def show_fullscreen(pil_image):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
-                elif event.key == any and event.key != pygame.K_ESCAPE:
+                elif event.key == pygame.K_SPACE:
                     space_pressed = not space_pressed 
         
         window.blit(image, (0, 0))
         if space_pressed:
-            intense_block_glitch(window, glitch_processor, intensity=random.randint(20, 30))
-            scary_datamosh_glitch(window, another_glitch_processor, intensity=random.randint(20, 30))
-            flick(window, intensity=random.randint(5, 15))
+            test(window, base_image=image, intensity=1000)
+            """
+                create a function which will signal the scary datamosh glitch with sound few time then call the new trojan glitch 
+                to lach the game in pitch black 
+            """            
+            ""
+            # scary_datamosh_glitch(window, another_glitch_processor, intensity=random.randint(100, 250))
+            # intense_block_glitch(window, glitch_processor, intensity=random.randint(20, 100))
+            # flick(window, intensity=random.randint(5, 15))
 
         pygame.display.flip()
     
