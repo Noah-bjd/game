@@ -1,1 +1,1 @@
-export PATH=/home/nbouljih/Desktop/Projects/game
+ export PATH="/home/nbouljih/Desktop/Projects/game:$PATH"
