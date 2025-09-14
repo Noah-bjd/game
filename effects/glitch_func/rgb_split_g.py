@@ -38,27 +38,3 @@ def rgb_split_glitch(surface, intensity=10):
     surface.blit(r_channel, (r_offset_x, r_offset_y))
     surface.blit(g_channel, (g_offset_x, g_offset_y))
     surface.blit(b_channel, (b_offset_x, b_offset_y))
-
-def color_inversion_glitch(surface, probability=0.3):
-    """
-    Randomly inverts colors in parts of the screen
-    """
-    if random.random() < probability:
-        width, height = surface.get_size()
-        
-        # Create an inverted version
-        inverted = surface.copy()
-        inverted.fill((255, 255, 255, 255), special_flags=pygame.BLEND_RGB_SUB)
-        
-        # Apply inverted parts randomly
-        for _ in range(random.randint(3, 10)):
-            x = random.randint(0, width - 50)
-            y = random.randint(0, height - 50)
-            w = random.randint(10, 100)
-            h = random.randint(10, 100)
-            
-            try:
-                inverted_part = inverted.subsurface(pygame.Rect(x, y, w, h))
-                surface.blit(inverted_part, (x, y))
-            except:
-                pass
