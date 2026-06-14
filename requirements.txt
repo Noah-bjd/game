@@ -1,0 +1,6 @@
+pygame
+pyautogui
+pillow
+numpy
+pyinstaller
+mss
